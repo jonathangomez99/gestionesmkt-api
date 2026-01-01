@@ -1,10 +1,13 @@
 from fastapi import FastAPI
 from db.session import get_db
 from routers import roles
+from routers.usuarios import router as usuarios_router
 
 app = FastAPI()
 
 app.include_router(roles.router)
+
+app.include_router(usuarios_router)
 
 @app.get("/")
 def healthcheck():
