@@ -1,19 +1,13 @@
-from fastapi import FastAPI, Depends
-from sqlalchemy.orm import Session
+from fastapi import FastAPI
 
-from db.session import SessionLocal
+from routers.roles import router as roles_router
 
 app = FastAPI()
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @app.get("/")
 def healthcheck():
     return {"status": "ok"}
+
+
+app.include_router(roles_router)
